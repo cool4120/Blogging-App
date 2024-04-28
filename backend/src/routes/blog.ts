@@ -58,12 +58,13 @@ BlogRouter.post('/', async(c) => {
     })
     if(!blog){
         return c.json({
-            error:"Aithor Already Exsists"
+            error:"Author Already Exsists"
         })
     }
     return c.json({
         id:blog.id
     })
+    
   })
   
 BlogRouter.get('/',async (c) => {
