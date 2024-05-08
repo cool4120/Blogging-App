@@ -23,12 +23,13 @@ export const Auth = ({type}:{type:'signup'|'signin'}) => {
                     </div>
                     <div>
                     {/* <div className="flex flex-col"> */}
+                    {type == 'signup'?
                         <LabelledInput placeholder="Enter Name" label="Name" onChange={(e) => {
                             setPostInputs(c => ({
                                 ...c,
                                 name:e.target.value
                             }))
-                        }}/>
+                        }}/>:null}
                         <LabelledInput placeholder="Enter Username" label="Username" onChange={(e) => {
                             setPostInputs(c => ({
                                 ...c,
@@ -42,7 +43,7 @@ export const Auth = ({type}:{type:'signup'|'signin'}) => {
                             }))
                         }}/>
                     </div>
-                    <button className="bg-black hover:bg-blue-700 w-full text-white font-bold py-2 px-10 my-3 rounded" onClick={()=> {}}>{type == 'signin'?'Sign In':'Sign Up'}</button>
+                    <button className="bg-black hover:bg-blue-700 w-full text-white font-bold py-2 px-10 my-3 rounded" onClick={()=> { }}>{type == 'signin'?'Sign In':'Sign Up'}</button>
                 </div>
             </div>       
         </div>

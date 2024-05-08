@@ -18,9 +18,10 @@ userRouter.post('/signin',async (c) => {
     }).$extends(withAccelerate());
     try{
       const body = await c.req.json()
+      console.log(`SignInBody`,body)
       const userExsist = await prisma.user.findUnique({
         where:{
-          email:body.email
+          email:body.username
         }
       })
       if(!userExsist){
@@ -40,11 +41,12 @@ userRouter.post('/signin',async (c) => {
   }).$extends(withAccelerate())
     try{
       const body = await c.req.json()
-  
+      console.log(`BODYVA`,body)
       await prisma.user.create({
         data:{
-          email:body.email,
-          password:body.password
+          email:body.username,
+          password:body.password,
+          name:body.name
         }
       })
       const token = await sign({id:body.email},c.env?.key)

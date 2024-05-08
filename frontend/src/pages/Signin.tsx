@@ -1,13 +1,13 @@
-import { Auth } from "../components/Auth";
 import { Qoutes } from "../components/Qoutes";
+import { SigninForm } from "../components/SigninForm";
 
 const Signin = () => {
-    return(<div className="flex grid grid-cols-2">
+    return(<div className="grid grid-cols-1 lg:grid-cols-2">
     <div>
-        <Auth type="signin"/>
+        <SigninForm/>
     </div>
-    <div className="invisible lg:visible"> 
-    <Qoutes/>
+    <div className="hidden lg:block"> 
+        <Qoutes/>
     </div>      
 </div> 
     )
