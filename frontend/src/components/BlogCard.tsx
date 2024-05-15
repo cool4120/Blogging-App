@@ -44,8 +44,8 @@ export const Avatar = ({name}:{name:string}) => {
     )
 }
 
-function Circle () {
-    return <div className="h-1 w-1 rounded-full bg-slate-200">
+// function Circle () {
+//     return <div className="h-1 w-1 rounded-full bg-slate-200">
 
-    </div>
-}
+//     </div>
+// }

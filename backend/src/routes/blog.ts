@@ -16,14 +16,17 @@ export const BlogRouter = new Hono<{
 BlogRouter.use('/*',async (c,next) => {
     try{
         const authHeader = c.req.header("Authorization");
-        console.log(`heder`,authHeader)
+        // console.log(`heder`,authHeader)
         if(!authHeader){
             c.status(403);
             return c.json({
                 error:'Unauthorized'            
             })
         }
-        const user = await verify(authHeader,c.env?.key)
+        console.log(`ENV Val`,c.env?.key)
+        // const user = {id:'1',name:'hello'};
+        const user = await verify(authHeader.split(' ')[1],c.env?.key)
+
         console.log(`idUser`,user)
          if(!user){
             c.status(401);
@@ -31,6 +34,7 @@ BlogRouter.use('/*',async (c,next) => {
                 error:'Unauthorized'            
             })
         }
+
         c.set("userId",user.id)
         await next()
     }catch(err){
@@ -67,14 +71,24 @@ BlogRouter.post('/', async(c) => {
     
   })
   
-BlogRouter.get('/',async (c) => {
+BlogRouter.get('/bulk',async (c) => {
     try{
         const prisma = new PrismaClient({
             datasourceUrl: c.env?.DATABASE_URL,
           }).$extends(withAccelerate());
-        const body = await c.res.json()
+        // const body = await c.res.json()
 
         const bog = prisma.post.findMany({
+            select:{
+                content: true,
+                title:true,
+                id:true,
+                author:{
+                    select:{
+                        name:true
+                    }
+                }
+            }
         })
         return c.json({
             bog
